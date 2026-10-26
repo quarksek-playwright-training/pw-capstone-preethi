@@ -1,0 +1,44 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    env:
+      ACCOUNT1_EMAIL: ${{ secrets.ACCOUNT1_EMAIL }}
+      ACCOUNT1_PASSWORD: ${{ secrets.ACCOUNT1_PASSWORD }}
+      ACCOUNT2_EMAIL: ${{ secrets.ACCOUNT2_EMAIL }}
+      ACCOUNT2_PASSWORD: ${{ secrets.ACCOUNT2_PASSWORD }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers and system dependencies
+        run: npx playwright install --with-deps
+
+      - name: Run full suite on Chromium, Firefox and WebKit
+        run: npx playwright test --workers=1
+
+      - name: Upload Playwright report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+          if-no-files-found: ignore
