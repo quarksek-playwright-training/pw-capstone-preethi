@@ -1,0 +1,37 @@
+{
+  "name": "pw-capstone-preethi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "test:auth": "playwright test --grep @auth",
+    "test:cart": "playwright test --grep @cart",
+    "test:search": "playwright test --grep @search",
+    "test:support": "playwright test --grep @support",
+    "test:negative": "playwright test --grep @negative",
+    "report": "playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quarksek-playwright-training/pw-capstone-preethi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/quarksek-playwright-training/pw-capstone-preethi/issues"
+  },
+  "homepage": "https://github.com/quarksek-playwright-training/pw-capstone-preethi#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.7"
+  }
+}
